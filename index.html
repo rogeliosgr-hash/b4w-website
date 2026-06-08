@@ -234,6 +234,23 @@ footer{background:var(--navy);color:rgba(255,255,255,0.58);padding:46px 5% 26px}
 .footer-links a{color:rgba(255,255,255,0.52);text-decoration:none;font-size:13px;transition:color 0.2s}
 .footer-links a:hover{color:var(--accent-bright)}
 .footer-bottom{max-width:1100px;margin:22px auto 0;display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.icon3d-wrap{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;position:relative;box-shadow:0 8px 24px rgba(13,55,160,0.3)}
+.icon3d-wrap::after{content:'';position:absolute;top:6px;left:12px;width:38px;height:18px;background:rgba(255,255,255,0.18);border-radius:50%;transform:rotate(-20deg)}
+.icon3d-wrap svg{width:36px;height:36px;position:relative;z-index:2}
+.icon3d-blue{background:linear-gradient(135deg,#42a5f5 0%,#0d47a1 100%)}
+.icon3d-teal{background:linear-gradient(135deg,#29b6f6 0%,#1565c0 100%)}
+.icon3d-navy{background:linear-gradient(135deg,#64b5f6 0%,#0d2d6e 100%)}
+.icon3d-green{background:linear-gradient(135deg,#4dd0e1 0%,#1565c0 100%)}
+.icon3d-indigo{background:linear-gradient(135deg,#7986cb 0%,#1a237e 100%)}
+.icon3d-sky{background:linear-gradient(135deg,#81d4fa 0%,#01579b 100%)}
+.rcard{background:#fff;border-radius:12px;padding:32px 26px;border:none;box-shadow:0 4px 24px rgba(13,37,69,0.09);transition:transform 0.2s,box-shadow 0.2s;text-align:center}
+.rcard:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(13,37,69,0.14)}
+.rcard-title{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.4px}
+.cscard{background:var(--off-white);border-radius:12px;padding:24px;transition:all 0.2s;text-align:center}
+.cscard:hover{background:#fff;box-shadow:0 6px 24px rgba(0,0,0,0.09);transform:translateY(-3px)}
+.cscard-ico{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;position:relative;box-shadow:0 6px 20px rgba(13,55,160,0.25)}
+.cscard-ico::after{content:'';position:absolute;top:5px;left:10px;width:32px;height:14px;background:rgba(255,255,255,0.2);border-radius:50%;transform:rotate(-20deg)}
+.cscard-ico svg{width:30px;height:30px;position:relative;z-index:2}
 
 /* TOAST */
 .toast{display:none;position:fixed;bottom:30px;right:30px;background:#1b5e20;color:#fff;padding:15px 22px;border-radius:8px;font-size:14px;font-weight:600;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.3);animation:slideUp 0.3s ease}
@@ -366,17 +383,23 @@ footer{background:var(--navy);color:rgba(255,255,255,0.58);padding:46px 5% 26px}
     </div>
     <div class="risk-grid">
       <div class="rcard">
-        <div class="ricon"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="icon3d-wrap icon3d-blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L20 7v5c0 5-4 9-8 10C8 21 4 17 4 12V7z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r="1" fill="white" stroke="none"/></svg>
+        </div>
         <div class="rcard-title">Riesgo Laboral</div>
         <ul class="rlist"><li>Multas STPS</li><li>Demandas laborales</li><li>Inspecciones frecuentes</li><li>Ausentismo elevado</li><li>Alta rotación de personal</li></ul>
       </div>
       <div class="rcard">
-        <div class="ricon"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+        <div class="icon3d-wrap icon3d-teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/><path d="M5 6l3-3 3 3" stroke="white" opacity="0.7"/></svg>
+        </div>
         <div class="rcard-title">Baja Productividad</div>
         <ul class="rlist"><li>Liderazgo deficiente</li><li>Falta de indicadores</li><li>Evaluaciones subjetivas</li><li>Desalineación organizacional</li><li>Procesos sin documentar</li></ul>
       </div>
       <div class="rcard">
-        <div class="ricon"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+        <div class="icon3d-wrap icon3d-navy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/><line x1="10" y1="12" x2="14" y2="12" stroke-dasharray="2 2"/><path d="M4 12H2"/><path d="M22 12h-2"/><path d="M7 6V4"/><path d="M17 6V4"/></svg>
+        </div>
         <div class="rcard-title">Cadena de Suministro Débil</div>
         <ul class="rlist"><li>Dependencia de pocos clientes</li><li>Proveedores sin capacidades</li><li>Baja integración local</li><li>Oportunidades perdidas con empresas ancla</li></ul>
       </div>
@@ -690,12 +713,12 @@ footer{background:var(--navy);color:rgba(255,255,255,0.58);padding:46px 5% 26px}
       <h2 class="section-title">Soluciones integrales de <span>compliance laboral</span></h2>
     </div>
     <div class="comp-services-grid">
-      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div class="cscard-title">Cumplimiento Normativo</div><div class="cscard-text">Aseguramos el cumplimiento de la legislación laboral y de seguridad y salud en el trabajo conforme a NOM-035, NOM-019 y NOM-030.</div></div>
-      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><div class="cscard-title">Auditorías Laborales</div><div class="cscard-text">Evaluamos riesgos y nivel de cumplimiento con enfoque preventivo para anticipar inspecciones y sanciones.</div></div>
-      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg></div><div class="cscard-title">Capacitación Especializada</div><div class="cscard-text">Formamos líderes y equipos en temas clave de cumplimiento y relaciones laborales para prevenir conflictos.</div></div>
-      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/></svg></div><div class="cscard-title">Relaciones Laborales</div><div class="cscard-text">Fortalecemos la comunicación con trabajadores y sus representantes para generar entornos laborales sanos.</div></div>
-      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="cscard-title">Seguridad y Salud en el Trabajo</div><div class="cscard-text">Implementamos sistemas para prevenir accidentes y promover entornos de trabajo seguros y normativos.</div></div>
-      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="cscard-title">Debida Diligencia en Cadena de Suministro</div><div class="cscard-text">Evaluamos y gestionamos riesgos laborales en proveedores y contratistas para proteger toda la cadena.</div></div>
+      <div class="cscard"><div class="cscard-ico icon3d-blue"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div class="cscard-title">Cumplimiento Normativo</div><div class="cscard-text">Aseguramos el cumplimiento de la legislación laboral y de seguridad y salud en el trabajo conforme a NOM-035, NOM-019 y NOM-030.</div></div>
+      <div class="cscard"><div class="cscard-ico icon3d-teal"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><div class="cscard-title">Auditorías Laborales</div><div class="cscard-text">Evaluamos riesgos y nivel de cumplimiento con enfoque preventivo para anticipar inspecciones y sanciones.</div></div>
+      <div class="cscard"><div class="cscard-ico icon3d-navy"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg></div><div class="cscard-title">Capacitación Especializada</div><div class="cscard-text">Formamos líderes y equipos en temas clave de cumplimiento y relaciones laborales para prevenir conflictos.</div></div>
+      <div class="cscard"><div class="cscard-ico icon3d-green"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/></svg></div><div class="cscard-title">Relaciones Laborales</div><div class="cscard-text">Fortalecemos la comunicación con trabajadores y sus representantes para generar entornos laborales sanos.</div></div>
+      <div class="cscard"><div class="cscard-ico icon3d-indigo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="cscard-title">Seguridad y Salud en el Trabajo</div><div class="cscard-text">Implementamos sistemas para prevenir accidentes y promover entornos de trabajo seguros y normativos.</div></div>
+      <div class="cscard"><div class="cscard-ico icon3d-sky"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="cscard-title">Debida Diligencia en Cadena de Suministro</div><div class="cscard-text">Evaluamos y gestionamos riesgos laborales en proveedores y contratistas para proteger toda la cadena.</div></div>
     </div>
   </div>
 
