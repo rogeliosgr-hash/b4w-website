@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B4W – Productividad. Cumplimiento. Desarrollo Empresarial.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0d2545;--navy-mid:#1a3a6b;--blue:#1565c0;--blue-light:#1e88e5;
+  --accent:#2196f3;--accent-bright:#42a5f5;--white:#ffffff;
+  --off-white:#f4f7fb;--gray-light:#e8eef6;--gray-mid:#8fa3bd;--gray-text:#4a5e78;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;font-size:16px;color:var(--navy);background:var(--white);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:70px;box-shadow:0 2px 20px rgba(0,0,0,0.3)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:46px;width:auto;object-fit:contain}
+.nav-logo-fallback{display:flex;align-items:center;gap:8px}
+.nav-logo-b4w{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:var(--white);letter-spacing:1px;line-height:1}
+.nav-logo-sub{font-size:9px;color:var(--accent-bright);font-weight:500;letter-spacing:0.5px;line-height:1.4;margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:12.5px;font-weight:600;letter-spacing:0.5px;padding:6px 10px;border-radius:4px;transition:all 0.2s;text-transform:uppercase}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-links a.active{color:var(--accent-bright)}
+.btn-nav-cta{background:var(--accent)!important;color:#fff!important;padding:8px 18px!important;border-radius:4px!important;font-weight:700!important}
+.btn-nav-cta:hover{background:var(--blue-light)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{width:24px;height:2px;background:white;border-radius:2px;display:block;transition:all 0.3s}
+
+/* BUTTONS */
+.btn-primary{background:var(--accent);color:#fff;padding:13px 26px;border-radius:5px;font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;font-family:'Barlow',sans-serif}
+.btn-primary:hover{background:var(--blue-light);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:#fff;padding:13px 26px;border-radius:5px;font-size:14px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;text-decoration:none;border:1.5px solid rgba(255,255,255,0.35);cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;font-family:'Barlow',sans-serif}
+.btn-outline:hover{border-color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06)}
+
+/* PAGE SECTIONS */
+.page-section{display:none}
+.page-section.active{display:block}
+
+/* SECTION LABELS */
+.section-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(26px,4vw,44px);font-weight:800;color:var(--navy);line-height:1.1;margin-bottom:16px}
+.section-title span{color:var(--accent)}
+.section-subtitle{font-size:16px;color:var(--gray-text);line-height:1.65;max-width:600px}
+
+/* ── HERO ── */
+.hero{min-height:100vh;padding-top:70px;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=80')}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,28,65,0.93) 0%,rgba(13,37,69,0.88) 45%,rgba(13,37,69,0.55) 100%)}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;width:100%;max-width:1200px;margin:0 auto;padding:70px 5%}
+.hero-badge{display:inline-block;background:rgba(33,150,243,0.2);border:1px solid rgba(33,150,243,0.45);color:var(--accent-bright);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:22px}
+.hero-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,5vw,60px);font-weight:800;color:#fff;line-height:1.05;margin-bottom:22px;letter-spacing:-0.5px}
+.hero-title .hl{color:var(--accent-bright)}
+.hero-desc{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.7;margin-bottom:34px;max-width:500px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.14)}
+.hstat-num{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:#fff;line-height:1}
+.hstat-num span{color:var(--accent-bright)}
+.hstat-lbl{font-size:12px;color:rgba(255,255,255,0.5);margin-top:3px;line-height:1.4}
+
+/* HERO RIGHT CARDS */
+.hero-cards{display:flex;flex-direction:column;gap:14px}
+.hcard{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:18px 22px;backdrop-filter:blur(6px)}
+.hcard-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-bright);margin-bottom:12px}
+.pill-wrap{display:flex;flex-wrap:wrap;gap:7px}
+.pill{background:rgba(33,150,243,0.15);border:1px solid rgba(33,150,243,0.3);color:rgba(255,255,255,0.85);font-size:12px;padding:5px 11px;border-radius:14px;font-weight:500}
+.org-badges{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.org-badge{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.82);font-size:12px;font-weight:700;padding:5px 11px;border-radius:4px;border:1px solid rgba(255,255,255,0.15)}
+
+/* STATS BAND */
+.stats-band{background:var(--navy);padding:56px 5%}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;max-width:1100px;margin:0 auto;text-align:center}
+.snum{font-family:'Barlow Condensed',sans-serif;font-size:50px;font-weight:800;color:#fff;line-height:1}
+.snum span{color:var(--accent-bright)}
+.slbl{font-size:13px;color:rgba(255,255,255,0.5);margin-top:7px;line-height:1.5}
+
+/* RISK SECTION */
+.risk-section{background:var(--off-white);padding:72px 5%}
+.risk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1100px;margin:40px auto 0}
+.rcard{background:#fff;border-radius:10px;padding:30px 26px;border-top:4px solid var(--accent);box-shadow:0 2px 18px rgba(13,37,69,0.07);transition:transform 0.2s,box-shadow 0.2s}
+.rcard:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(13,37,69,0.12)}
+.ricon{width:50px;height:50px;background:var(--off-white);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.ricon svg{width:24px;height:24px}
+.rcard-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.4px}
+.rlist{list-style:none}
+.rlist li{font-size:13.5px;color:var(--gray-text);padding:5px 0;border-bottom:1px solid var(--gray-light);display:flex;align-items:center;gap:8px}
+.rlist li:last-child{border-bottom:none}
+.rlist li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* SERVICES SECTION */
+.services-section{background:#fff;padding:80px 5%}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:1100px;margin:48px auto 0;border-radius:14px;overflow:hidden;box-shadow:0 4px 32px rgba(13,37,69,0.1)}
+.sblock{display:grid;grid-template-rows:auto 1fr}
+.sblock-img{height:220px;background-size:cover;background-position:center;position:relative}
+.sblock-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(13,37,69,0.7) 0%,transparent 60%)}
+.sblock-img-label{position:absolute;bottom:16px;left:20px;right:20px;z-index:2}
+.sblock-img-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:#fff;line-height:1.1}
+.sblock-img-sub{font-size:12px;color:rgba(255,255,255,0.7);margin-top:3px}
+.sblock-body{background:var(--off-white);padding:26px 28px}
+.sblock-desc{font-size:14px;color:var(--gray-text);line-height:1.65;margin-bottom:18px}
+.sfeat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sfeat{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--navy);font-weight:500}
+.sfeat svg{width:15px;height:15px;color:var(--accent);flex-shrink:0}
+.sblock-cta{margin-top:18px}
+
+/* CASOS */
+.casos-section{background:var(--off-white);padding:80px 5%}
+.casos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:44px auto 0}
+.caso-card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.06)}
+.caso-header{background:var(--navy);padding:18px 22px}
+.caso-tag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-bright);margin-bottom:4px}
+.caso-industry{font-size:13px;color:rgba(255,255,255,0.55)}
+.caso-body{padding:22px}
+.caso-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray-mid);margin-bottom:5px}
+.caso-text{font-size:13px;color:var(--gray-text);line-height:1.55;margin-bottom:12px}
+.caso-benefit{background:rgba(33,150,243,0.07);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0}
+.caso-benefit-lbl{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
+.caso-benefit-val{font-size:14px;font-weight:700;color:var(--navy)}
+
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:70px 5%;text-align:center}
+.cta-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(26px,4vw,44px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:14px}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.62);margin-bottom:32px;max-width:540px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ── PROVEEDORES PAGE ── */
+.page-hero{min-height:55vh;padding-top:70px;position:relative;display:flex;align-items:center;overflow:hidden}
+.page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.page-hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,28,65,0.92) 0%,rgba(13,37,69,0.78) 60%,rgba(13,37,69,0.4) 100%)}
+.page-hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:60px 5%;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;width:100%}
+.page-hero-tag{display:inline-block;background:rgba(33,150,243,0.2);border:1px solid rgba(33,150,243,0.4);color:var(--accent-bright);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+.page-hero-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,4.5vw,52px);font-weight:800;color:#fff;line-height:1.05;margin-bottom:16px}
+.page-hero-title span{color:var(--accent-bright)}
+.page-hero-desc{font-size:16px;color:rgba(255,255,255,0.75);line-height:1.68;margin-bottom:28px}
+.page-hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+
+/* PROBLEM BOX */
+.prob-box{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:28px;backdrop-filter:blur(8px)}
+.prob-box-title{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-bright);margin-bottom:8px}
+.prob-statement{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:20px}
+.prob-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.prob-card{background:rgba(255,255,255,0.06);border-radius:8px;padding:14px 12px;text-align:center}
+.prob-card-ico{width:32px;height:32px;background:rgba(33,150,243,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.prob-card-ttl{font-size:11px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
+.prob-card-txt{font-size:11px;color:rgba(255,255,255,0.55);line-height:1.4}
+
+/* METH FLOW */
+.meth-section{background:var(--navy);border-radius:14px;padding:44px 48px;max-width:1100px;margin:0 auto}
+.meth-lbl{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent-bright);margin-bottom:8px}
+.meth-title{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;margin-bottom:34px}
+.flow-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;position:relative}
+.flow-step{text-align:center;position:relative}
+.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:12px;color:rgba(255,255,255,0.25);font-size:16px}
+.flow-num{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 9px;font-family:'Barlow Condensed',sans-serif}
+.flow-name{font-size:11px;color:rgba(255,255,255,0.78);font-weight:600;line-height:1.3;text-align:center}
+
+/* METH DETAIL CARDS */
+.meth-detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1100px;margin:0 auto}
+.mdc{background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 16px rgba(0,0,0,0.05);border-top:3px solid var(--accent)}
+.mdc-num{width:26px;height:26px;background:var(--accent);color:#fff;border-radius:50%;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:11px}
+.mdc-title{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:7px}
+.mdc-text{font-size:13px;color:var(--gray-text);line-height:1.55}
+
+/* WITH IMAGE SPLIT */
+.split-section{display:grid;grid-template-columns:1fr 1fr;max-width:1100px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.09)}
+.split-img{background-size:cover;background-position:center;min-height:360px}
+.split-content{background:var(--off-white);padding:40px 36px;display:flex;flex-direction:column;justify-content:center}
+
+/* SECTORS */
+.sector-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;max-width:1100px;margin:22px auto 0}
+.sector-item{background:#fff;border-radius:8px;padding:18px;text-align:center;border:1.5px solid var(--gray-light);transition:all 0.2s;cursor:default}
+.sector-item:hover{border-color:var(--accent);transform:translateY(-2px)}
+.sector-item svg{width:30px;height:30px;color:var(--accent);margin-bottom:8px}
+.sector-name{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.5px}
+
+/* COMP SERVICES */
+.comp-services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto}
+.cscard{background:var(--off-white);border-radius:10px;padding:22px;transition:all 0.2s}
+.cscard:hover{background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.cscard-ico{width:46px;height:46px;background:rgba(33,150,243,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:13px}
+.cscard-title{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:7px}
+.cscard-text{font-size:13px;color:var(--gray-text);line-height:1.55}
+
+/* NORMS BAND */
+.norms-band{background:var(--navy);border-radius:14px;padding:38px 46px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.norms-title{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#fff;margin-bottom:10px}
+.norms-sub{font-size:14px;color:rgba(255,255,255,0.52);line-height:1.6}
+.norms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.norm-badge{background:rgba(33,150,243,0.15);border:1px solid rgba(33,150,243,0.3);color:var(--accent-bright);font-size:12px;font-weight:700;padding:10px;border-radius:6px;text-align:center}
+
+/* CONTACT */
+.contact-section{padding:100px 5% 80px;background:var(--off-white)}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1100px;margin:0 auto;align-items:start}
+.contact-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;color:var(--navy);line-height:1.1;margin-bottom:18px}
+.contact-title span{color:var(--accent)}
+.contact-desc{font-size:16px;color:var(--gray-text);line-height:1.7;margin-bottom:32px}
+.cdetail{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.cdetail-ico{width:42px;height:42px;background:rgba(33,150,243,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cdetail-ico svg{width:19px;height:19px;color:var(--accent)}
+.cdetail-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray-mid);margin-bottom:2px}
+.cdetail-val{font-size:15px;color:var(--navy);font-weight:600}
+.form-card{background:#fff;border-radius:14px;padding:38px;box-shadow:0 4px 30px rgba(13,37,69,0.08)}
+.form-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--navy);margin-bottom:4px}
+.form-sub{font-size:13px;color:var(--gray-text);margin-bottom:26px}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px}
+.form-input,.form-select,.form-textarea{width:100%;padding:11px 13px;border:1.5px solid var(--gray-light);border-radius:6px;font-size:14px;font-family:'Barlow',sans-serif;color:var(--navy);background:#fff;transition:border-color 0.2s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent)}
+.form-textarea{resize:vertical;min-height:96px;line-height:1.5}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.form-submit{width:100%;background:var(--accent);color:#fff;padding:14px;border-radius:6px;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.2s;margin-top:6px;font-family:'Barlow',sans-serif}
+.form-submit:hover{background:var(--blue);transform:translateY(-1px)}
+.form-note{font-size:11px;color:var(--gray-mid);text-align:center;margin-top:10px}
+
+/* PARTNERS BOX */
+.partners-box{margin-top:32px;padding:22px;background:rgba(33,150,243,0.06);border-radius:10px;border-left:4px solid var(--accent)}
+.partners-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:12px}
+.partners-logos{display:flex;flex-wrap:wrap;gap:7px}
+.plogo{background:#fff;border:1.5px solid var(--gray-light);color:var(--navy);font-size:12px;font-weight:700;padding:5px 11px;border-radius:4px}
+
+/* FOOTER */
+footer{background:var(--navy);color:rgba(255,255,255,0.58);padding:46px 5% 26px}
+.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;max-width:1100px;margin:0 auto;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.footer-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.footer-logo-row img{height:38px;width:auto;object-fit:contain}
+.footer-logo-b4w{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#fff}
+.footer-desc{font-size:13px;line-height:1.65}
+.footer-col-title{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;margin-bottom:13px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-links a{color:rgba(255,255,255,0.52);text-decoration:none;font-size:13px;transition:color 0.2s}
+.footer-links a:hover{color:var(--accent-bright)}
+.footer-bottom{max-width:1100px;margin:22px auto 0;display:flex;justify-content:space-between;align-items:center;font-size:12px}
+
+/* TOAST */
+.toast{display:none;position:fixed;bottom:30px;right:30px;background:#1b5e20;color:#fff;padding:15px 22px;border-radius:8px;font-size:14px;font-weight:600;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.3);animation:slideUp 0.3s ease}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-inner,.page-hero-inner,.contact-inner,.footer-inner,.services-grid,.norms-band,.split-section{grid-template-columns:1fr}
+  .risk-grid,.casos-grid,.comp-services-grid{grid-template-columns:1fr 1fr}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .flow-steps{grid-template-columns:repeat(3,1fr)}
+  .flow-step::after{display:none}
+  .meth-detail-grid,.sector-grid{grid-template-columns:repeat(2,1fr)}
+  .split-img{min-height:250px}
+  .hamburger{display:flex}
+  .nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:var(--navy);padding:14px;flex-direction:column;gap:4px}
+  .nav-links.open{display:flex}
+}
+@media(max-width:600px){
+  .risk-grid,.casos-grid,.comp-services-grid,.meth-detail-grid,.sector-grid,.prob-cards,.form-row{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .footer-inner{grid-template-columns:1fr}
+}
+
+/* UTILITY */
+.padded{padding:72px 5%}
+.padded-sm{padding:56px 5%}
+.center{text-align:center}
+.mb-header{margin-bottom:48px}
+.max-w{max-width:1100px;margin-left:auto;margin-right:auto}
+.check-list{display:flex;flex-direction:column;gap:11px}
+.check-item{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--navy);font-weight:500}
+.check-item svg{width:17px;height:17px;color:var(--accent);flex-shrink:0}
+.metric-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+.mmi{background:var(--off-white);border-radius:8px;padding:16px;text-align:center}
+.mmi-val{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:800;color:var(--navy);line-height:1}
+.mmi-val span{color:var(--accent)}
+.mmi-lbl{font-size:12px;color:var(--gray-text);margin-top:3px;line-height:1.4}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo" onclick="showSection('inicio');return false">
+    <!-- LOGO: reemplaza logo-b4w.png con tu archivo -->
+    <img src="logo-b4w.png" alt="B4W Logo"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="nav-logo-fallback" style="display:none">
+      <span class="nav-logo-b4w">B4W</span>
+      <div>
+        <div style="font-size:8px;color:var(--accent-bright);font-weight:600;letter-spacing:0.5px">Productividad. Cumplimiento.</div>
+        <div style="font-size:8px;color:var(--accent-bright);font-weight:600;letter-spacing:0.5px">Desarrollo Empresarial.</div>
+      </div>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" onclick="showSection('inicio');return false" class="active" id="nav-inicio">Inicio</a></li>
+    <li><a href="#" onclick="showSection('proveedores');return false" id="nav-proveedores">Desarrollo de Proveedores</a></li>
+    <li><a href="#" onclick="showSection('cumplimiento');return false" id="nav-cumplimiento">Compliance Laboral</a></li>
+    <li><a href="#" onclick="showSection('contacto');return false" id="nav-contacto">Contacto</a></li>
+    <li><a href="#" onclick="showSection('contacto');return false" class="btn-nav-cta">Contacto</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════
+     INICIO
+═══════════════════════════════ -->
+<div id="sec-inicio" class="page-section active">
+
+  <!-- HERO con foto Unsplash -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">+15 años de experiencia · México · Colombia · Sudáfrica</div>
+        <h1 class="hero-title">Convertimos Cumplimiento y Cadenas de Suministro en <span class="hl">Productividad Medible.</span></h1>
+        <p class="hero-desc">Ayudamos a las organizaciones a reducir riesgos laborales, fortalecer su talento y desarrollar proveedores capaces de competir en cadenas globales de valor.</p>
+        <div class="hero-ctas">
+          <a href="#" class="btn-primary" onclick="showSection('contacto');return false">Solicitar Diagnóstico</a>
+          <a href="#" class="btn-outline" onclick="showSection('proveedores');return false">Conocer Más</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="hstat-num"><span>+450</span></div><div class="hstat-lbl">Empresas atendidas en productividad y compliance</div></div>
+          <div><div class="hstat-num"><span>+27,000</span></div><div class="hstat-lbl">Trabajadores evaluados para toma de decisiones</div></div>
+          <div><div class="hstat-num"><span>+17</span> <span style="font-size:20px;vertical-align:middle">MUSD</span></div><div class="hstat-lbl">Movilizados en programas de desarrollo</div></div>
+          <div><div class="hstat-num"><span>+15</span> <span style="font-size:20px;vertical-align:middle">Años</span></div><div class="hstat-lbl">Impulsando productividad y competitividad</div></div>
+        </div>
+      </div>
+      <div class="hero-cards">
+        <div class="hcard">
+          <div class="hcard-title">Áreas de especialización</div>
+          <div class="pill-wrap">
+            <span class="pill">Desarrollo de Proveedores</span>
+            <span class="pill">Compliance Laboral</span>
+            <span class="pill">NOM-035 / NOM-019</span>
+            <span class="pill">IED Ready</span>
+            <span class="pill">Cadenas Globales de Valor</span>
+            <span class="pill">Dashboard Ejecutivo</span>
+            <span class="pill">Auditorías Laborales</span>
+          </div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-title">Organismos internacionales</div>
+          <div class="org-badges">
+            <span class="org-badge">BID</span>
+            <span class="org-badge">PNUD México</span>
+            <span class="org-badge">PNUD Sudáfrica</span>
+            <span class="org-badge">USAID</span>
+            <span class="org-badge">Colombia Productiva</span>
+            <span class="org-badge">COMCE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-band">
+    <div class="stats-inner">
+      <div><div class="snum"><span>+450</span></div><div class="slbl">Empresas atendidas en productividad, compliance y fortalecimiento</div></div>
+      <div><div class="snum"><span>+27,000</span></div><div class="slbl">Trabajadores evaluados para la toma de decisiones organizacionales</div></div>
+      <div><div class="snum"><span>+17</span> MUSD</div><div class="slbl">Movilizados en programas de desarrollo empresarial</div></div>
+      <div><div class="snum"><span>+15</span> Años</div><div class="slbl">Impulsando productividad en manufactura, servicios y cadenas de suministro</div></div>
+    </div>
+  </div>
+
+  <!-- RIESGOS -->
+  <div class="risk-section">
+    <div class="center mb-header">
+      <div class="section-label">Diagnóstico</div>
+      <h2 class="section-title">Los 3 riesgos que <span>más afectan la rentabilidad</span></h2>
+    </div>
+    <div class="risk-grid">
+      <div class="rcard">
+        <div class="ricon"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="rcard-title">Riesgo Laboral</div>
+        <ul class="rlist"><li>Multas STPS</li><li>Demandas laborales</li><li>Inspecciones frecuentes</li><li>Ausentismo elevado</li><li>Alta rotación de personal</li></ul>
+      </div>
+      <div class="rcard">
+        <div class="ricon"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+        <div class="rcard-title">Baja Productividad</div>
+        <ul class="rlist"><li>Liderazgo deficiente</li><li>Falta de indicadores</li><li>Evaluaciones subjetivas</li><li>Desalineación organizacional</li><li>Procesos sin documentar</li></ul>
+      </div>
+      <div class="rcard">
+        <div class="ricon"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+        <div class="rcard-title">Cadena de Suministro Débil</div>
+        <ul class="rlist"><li>Dependencia de pocos clientes</li><li>Proveedores sin capacidades</li><li>Baja integración local</li><li>Oportunidades perdidas con empresas ancla</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- LO QUE HACEMOS — con fotos -->
+  <div class="services-section">
+    <div class="center mb-header">
+      <div class="section-label">Nuestros Servicios</div>
+      <h2 class="section-title">Lo que <span>hacemos</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="sblock">
+        <div class="sblock-img" style="background-image:url('https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&q=80')">
+          <div class="sblock-img-label">
+            <div class="sblock-img-title">Desarrollo de Proveedores</div>
+            <div class="sblock-img-sub">Transformamos proveedores en socios estratégicos</div>
+          </div>
+        </div>
+        <div class="sblock-body">
+          <p class="sblock-desc">Diseñamos e implementamos programas de desarrollo de proveedores basados en metodologías multilaterales para integrarlos a cadenas globales de valor.</p>
+          <div class="sfeat-grid">
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Diagnóstico de capacidades</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Integración a cadenas globales</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Evaluación IED Ready</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Plataforma de seguimiento</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Planes de cierre de brechas</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Indicadores de impacto</div>
+          </div>
+          <div class="sblock-cta"><a href="#" class="btn-primary" onclick="showSection('proveedores');return false" style="font-size:13px;padding:10px 20px">Ver metodología completa →</a></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="sblock-img" style="background-image:url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80')">
+          <div class="sblock-img-label">
+            <div class="sblock-img-title">Compliance Laboral Inteligente</div>
+            <div class="sblock-img-sub">Cumplimiento que genera productividad</div>
+          </div>
+        </div>
+        <div class="sblock-body">
+          <p class="sblock-desc">Convertimos obligaciones laborales en información estratégica para mejorar el entorno laboral, disminuir riesgos y fortalecer el desempeño organizacional.</p>
+          <div class="sfeat-grid">
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>NOM-035</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Comisiones Mixtas</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>NOM-019 / NOM-030</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Evaluación de Desempeño</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Dashboard Ejecutivo</div>
+            <div class="sfeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Planes de intervención</div>
+          </div>
+          <div class="sblock-cta"><a href="#" class="btn-primary" onclick="showSection('cumplimiento');return false" style="font-size:13px;padding:10px 20px;background:var(--blue)">Ver servicios de compliance →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASOS DE ÉXITO -->
+  <div class="casos-section">
+    <div class="center mb-header">
+      <div class="section-label">Resultados Reales</div>
+      <h2 class="section-title">Casos de <span>Éxito</span></h2>
+    </div>
+    <div class="casos-grid">
+      <div class="caso-card">
+        <div class="caso-header"><div class="caso-tag">Empresa Manufacturera</div><div class="caso-industry">Industria: Manufactura</div></div>
+        <div class="caso-body">
+          <div class="caso-lbl">Problema</div><p class="caso-text">Alta rotación y riesgo de incumplimiento NOM-035.</p>
+          <div class="caso-lbl">Resultado</div><p class="caso-text">Diagnóstico organizacional, plan de acción y mejora del clima laboral.</p>
+          <div class="caso-benefit"><div class="caso-benefit-lbl">Beneficio</div><div class="caso-benefit-val">Reducción de rotación en 35%</div></div>
+        </div>
+      </div>
+      <div class="caso-card">
+        <div class="caso-header"><div class="caso-tag">Empresa Ancla</div><div class="caso-industry">Industria: Manufactura</div></div>
+        <div class="caso-body">
+          <div class="caso-lbl">Problema</div><p class="caso-text">Necesidad de desarrollar proveedores locales calificados.</p>
+          <div class="caso-lbl">Resultado</div><p class="caso-text">Mapa de capacidades, diagnóstico y programa de fortalecimiento.</p>
+          <div class="caso-benefit"><div class="caso-benefit-lbl">Beneficio</div><div class="caso-benefit-val">+42% proveedores locales calificados</div></div>
+        </div>
+      </div>
+      <div class="caso-card">
+        <div class="caso-header"><div class="caso-tag">Cámara Empresarial</div><div class="caso-industry">Sector: Comercio y Servicios</div></div>
+        <div class="caso-body">
+          <div class="caso-lbl">Problema</div><p class="caso-text">Empresas afiliadas con bajo nivel de cumplimiento laboral.</p>
+          <div class="caso-lbl">Resultado</div><p class="caso-text">Programa masivo de compliance laboral y productividad.</p>
+          <div class="caso-benefit"><div class="caso-benefit-lbl">Beneficio</div><div class="caso-benefit-val">+200 empresas con cumplimiento elevado</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h2 class="cta-title">Hagamos que su organización sea más<br>productiva, competitiva y rentable.</h2>
+    <p class="cta-sub">Solicite un Diagnóstico Ejecutivo sin costo y descubra cómo podemos ayudarle.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-primary" onclick="showSection('contacto');return false">Solicitar Diagnóstico Ejecutivo</a>
+      <a href="#" class="btn-outline" onclick="openMeetingModal();return false">Agendar Reunión</a>
+    </div>
+  </div>
+
+</div><!-- /sec-inicio -->
+
+
+<!-- ═══════════════════════════════
+     PROVEEDORES
+═══════════════════════════════ -->
+<div id="sec-proveedores" class="page-section">
+
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1600&q=80')"></div>
+    <div class="page-hero-inner">
+      <div>
+        <span class="page-hero-tag">Desarrollo de Proveedores</span>
+        <h1 class="page-hero-title">Desarrollamos proveedores capaces de competir en <span>Cadenas Globales de Valor.</span></h1>
+        <p class="page-hero-desc">Ayudamos a empresas, organismos de desarrollo, gobiernos y empresas ancla a identificar, fortalecer e integrar proveedores estratégicos mediante metodologías probadas.</p>
+        <div class="page-hero-ctas">
+          <a href="#" class="btn-primary" onclick="showSection('contacto');return false">Solicitar Diagnóstico</a>
+          <a href="#" class="btn-outline" onclick="document.getElementById('meth-prov').scrollIntoView({behavior:'smooth'});return false">Conoce la metodología</a>
+        </div>
+      </div>
+      <div class="prob-box">
+        <div class="prob-box-title">El Problema</div>
+        <div class="prob-statement">Muchas empresas quieren venderle a grandes corporativos. Pocas están realmente preparadas.</div>
+        <div class="prob-cards">
+          <div class="prob-card"><div class="prob-card-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#42a5f5" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="prob-card-ttl">Capacidades Insuficientes</div><div class="prob-card-txt">Procesos poco documentados y baja productividad</div></div>
+          <div class="prob-card"><div class="prob-card-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#42a5f5" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="prob-card-ttl">Falta de Visibilidad</div><div class="prob-card-txt">Las anclas desconocen quién puede ser proveedor</div></div>
+          <div class="prob-card"><div class="prob-card-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#42a5f5" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div class="prob-card-ttl">Brechas Técnicas</div><div class="prob-card-txt">Calidad, trazabilidad y gestión operativa deficiente</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METODOLOGÍA FLOW -->
+  <div class="padded">
+    <div id="meth-prov" class="meth-section">
+      <div class="meth-lbl">Nuestra Propuesta</div>
+      <div class="meth-title">Cerramos las brechas que impiden a los proveedores crecer.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-num">1</div><div class="flow-name">Diagnóstico</div></div>
+        <div class="flow-step"><div class="flow-num">2</div><div class="flow-name">Evaluación de Capacidades</div></div>
+        <div class="flow-step"><div class="flow-num">3</div><div class="flow-name">Plan de Fortalecimiento</div></div>
+        <div class="flow-step"><div class="flow-num">4</div><div class="flow-name">Implementación</div></div>
+        <div class="flow-step"><div class="flow-num">5</div><div class="flow-name">Seguimiento</div></div>
+        <div class="flow-step"><div class="flow-num">6</div><div class="flow-name">Integración Comercial</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METODOLOGÍA DETALLE -->
+  <div class="padded-sm" style="background:var(--off-white)">
+    <div class="center mb-header">
+      <div class="section-label">Metodología B4W</div>
+      <h2 class="section-title">Proceso probado y <span>orientado a resultados</span></h2>
+    </div>
+    <div class="meth-detail-grid">
+      <div class="mdc"><div class="mdc-num">1</div><div class="mdc-title">Diagnóstico Integral</div><div class="mdc-text">Evaluamos capacidades productivas, operativas, comerciales y organizacionales para identificar el punto de partida real de cada proveedor.</div></div>
+      <div class="mdc"><div class="mdc-num">2</div><div class="mdc-title">Evaluación IED Ready</div><div class="mdc-text">Determinamos el nivel de preparación para integrarse a cadenas globales de valor y cumplir estándares de inversión extranjera directa.</div></div>
+      <div class="mdc"><div class="mdc-num">3</div><div class="mdc-title">Cierre de Brechas</div><div class="mdc-text">Diseñamos planes de trabajo enfocados en productividad, calidad, cumplimiento y competitividad para cerrar las brechas identificadas.</div></div>
+      <div class="mdc"><div class="mdc-num">4</div><div class="mdc-title">Vinculación Comercial</div><div class="mdc-text">Facilitamos la conexión con empresas ancla y cadenas de suministro, generando contratos y oportunidades comerciales concretas.</div></div>
+    </div>
+  </div>
+
+  <!-- SPLIT CON FOTO + RESULTADOS -->
+  <div class="padded">
+    <div class="split-section">
+      <div class="split-img" style="background-image:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80')"></div>
+      <div class="split-content">
+        <div class="section-label">Lo que podemos medir</div>
+        <h3 class="section-title" style="font-size:clamp(22px,3vw,32px)">Resultados con <span>impacto verificable</span></h3>
+        <div class="check-list" style="margin-bottom:28px">
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Productividad e incremento de capacidad instalada</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Calidad y reducción de rechazos</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Entregas OTIF y mejora en competitividad</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Nuevos contratos obtenidos y capital movilizado</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Puestos de trabajo generados</div>
+        </div>
+        <div class="metric-mini-grid">
+          <div class="mmi"><div class="mmi-val"><span>+450</span></div><div class="mmi-lbl">Empresas fortalecidas</div></div>
+          <div class="mmi"><div class="mmi-val"><span>+27K</span></div><div class="mmi-lbl">Trabajadores impactados</div></div>
+          <div class="mmi"><div class="mmi-val"><span>+17</span> <span style="font-size:16px">MUSD</span></div><div class="mmi-lbl">Movilizados</div></div>
+          <div class="mmi"><div class="mmi-val"><span>3</span></div><div class="mmi-lbl">Países con experiencia</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTORES -->
+  <div class="padded-sm" style="background:var(--off-white)">
+    <div class="section-label">Sectores en los que trabajamos</div>
+    <div class="sector-grid">
+      <div class="sector-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3m2 2l3 3-3 3M7 12h12"/></svg><div class="sector-name">Automotriz</div></div>
+      <div class="sector-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg><div class="sector-name">Aeroespacial</div></div>
+      <div class="sector-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><div class="sector-name">Dispositivos Médicos</div></div>
+      <div class="sector-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><div class="sector-name">Manufactura Avanzada</div></div>
+      <div class="sector-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><div class="sector-name">Químico</div></div>
+      <div class="sector-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><div class="sector-name">Logística</div></div>
+      <div class="sector-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><div class="sector-name">Minería y Tierras Raras</div></div>
+      <div class="sector-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22V12"/><path d="M5 12H2a10 10 0 0020 0h-3"/><circle cx="12" cy="5" r="3"/></svg><div class="sector-name">Agroindustria</div></div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h2 class="cta-title">¿Listo para integrar sus proveedores<br>a cadenas globales de valor?</h2>
+    <p class="cta-sub">Solicite un Diagnóstico Ejecutivo sin costo y descubra el potencial de su cadena de suministro.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-primary" onclick="showSection('contacto');return false">Solicitar Diagnóstico</a>
+      <a href="#" class="btn-outline" onclick="openMeetingModal();return false">Agendar Reunión</a>
+    </div>
+  </div>
+
+</div><!-- /sec-proveedores -->
+
+
+<!-- ═══════════════════════════════
+     COMPLIANCE LABORAL
+═══════════════════════════════ -->
+<div id="sec-cumplimiento" class="page-section">
+
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1600&q=80')"></div>
+    <div class="page-hero-inner">
+      <div>
+        <span class="page-hero-tag">Compliance Laboral</span>
+        <h1 class="page-hero-title">Convertimos Cumplimiento en <span>Productividad y Confianza.</span></h1>
+        <p class="page-hero-desc">Ayudamos a las empresas a gestionar sus riesgos laborales, fortalecer sus procesos y generar entornos de trabajo dignos, seguros y en cumplimiento con la ley.</p>
+        <div class="page-hero-ctas">
+          <a href="#" class="btn-primary" onclick="showSection('contacto');return false">Solicitar Diagnóstico</a>
+          <a href="#" class="btn-outline">Conoce la metodología</a>
+        </div>
+      </div>
+      <div class="prob-box">
+        <div class="prob-box-title">Impacto en su empresa</div>
+        <div class="check-list">
+          <div class="check-item" style="color:rgba(255,255,255,0.85)"><svg viewBox="0 0 24 24" fill="none" stroke="#42a5f5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Reducción de riesgos legales y operativos</div>
+          <div class="check-item" style="color:rgba(255,255,255,0.85)"><svg viewBox="0 0 24 24" fill="none" stroke="#42a5f5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Ambientes laborales más seguros y motivados</div>
+          <div class="check-item" style="color:rgba(255,255,255,0.85)"><svg viewBox="0 0 24 24" fill="none" stroke="#42a5f5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Mayor productividad y eficiencia</div>
+          <div class="check-item" style="color:rgba(255,255,255,0.85)"><svg viewBox="0 0 24 24" fill="none" stroke="#42a5f5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Mejora de reputación y confianza</div>
+          <div class="check-item" style="color:rgba(255,255,255,0.85)"><svg viewBox="0 0 24 24" fill="none" stroke="#42a5f5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Empresas sostenibles y competitivas</div>
+        </div>
+        <div style="margin-top:20px;padding:14px 16px;background:rgba(33,150,243,0.12);border-radius:8px;border-left:3px solid var(--accent-bright)">
+          <div style="font-size:12px;font-style:italic;color:rgba(255,255,255,0.8);line-height:1.55">"El objetivo no es solo cumplir con la ley. El objetivo es utilizar el cumplimiento para mejorar la productividad."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIESGOS COMP -->
+  <div class="padded" style="background:var(--off-white)">
+    <div class="center mb-header">
+      <div class="section-label">Diagnóstico</div>
+      <h2 class="section-title">Los riesgos que <span>enfrentan las empresas</span></h2>
+      <p class="section-subtitle" style="margin:0 auto">El incumplimiento laboral puede generar sanciones, sobrecostos, interrupciones operativas y daño reputacional.</p>
+    </div>
+    <div class="risk-grid">
+      <div class="rcard" style="border-top-color:var(--blue)">
+        <div class="ricon"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M8 19H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v3"/><path d="M15 14l2 2 4-4"/></svg></div>
+        <div class="rcard-title">Riesgo Legal</div>
+        <ul class="rlist"><li>Multas y sanciones STPS</li><li>Litigios que afectan la operación</li><li>Pérdida de contratos por incumplimiento</li><li>Contingencias fiscales y laborales</li></ul>
+      </div>
+      <div class="rcard" style="border-top-color:var(--blue)">
+        <div class="ricon"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="rcard-title">Riesgo Operativo</div>
+        <ul class="rlist"><li>Paros de planta</li><li>Inspecciones frecuentes</li><li>Retrasos que impactan la producción</li><li>Rotación y ausentismo elevados</li></ul>
+      </div>
+      <div class="rcard" style="border-top-color:var(--blue)">
+        <div class="ricon"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="rcard-title">Riesgo Reputacional</div>
+        <ul class="rlist"><li>Pérdida de confianza de clientes</li><li>Daño con inversionistas</li><li>Impacto en comunidades locales</li><li>Dificultad para atraer talento</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- METODOLOGÍA FLOW COMP -->
+  <div class="padded">
+    <div class="meth-section">
+      <div class="meth-lbl">Nuestra Metodología</div>
+      <div class="meth-title">Cumplimiento que genera valor, no solo que evita sanciones.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-num">1</div><div class="flow-name">Diagnóstico Laboral</div></div>
+        <div class="flow-step"><div class="flow-num">2</div><div class="flow-name">Evaluación de Cumplimiento</div></div>
+        <div class="flow-step"><div class="flow-num">3</div><div class="flow-name">Plan de Acción</div></div>
+        <div class="flow-step"><div class="flow-num">4</div><div class="flow-name">Implementación y Capacitación</div></div>
+        <div class="flow-step"><div class="flow-num">5</div><div class="flow-name">Monitoreo y Seguimiento</div></div>
+        <div class="flow-step"><div class="flow-num">6</div><div class="flow-name">Mejora Continua</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICIOS COMP -->
+  <div class="padded-sm" style="background:var(--off-white)">
+    <div class="center mb-header">
+      <div class="section-label">Nuestros Servicios</div>
+      <h2 class="section-title">Soluciones integrales de <span>compliance laboral</span></h2>
+    </div>
+    <div class="comp-services-grid">
+      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div class="cscard-title">Cumplimiento Normativo</div><div class="cscard-text">Aseguramos el cumplimiento de la legislación laboral y de seguridad y salud en el trabajo conforme a NOM-035, NOM-019 y NOM-030.</div></div>
+      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><div class="cscard-title">Auditorías Laborales</div><div class="cscard-text">Evaluamos riesgos y nivel de cumplimiento con enfoque preventivo para anticipar inspecciones y sanciones.</div></div>
+      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg></div><div class="cscard-title">Capacitación Especializada</div><div class="cscard-text">Formamos líderes y equipos en temas clave de cumplimiento y relaciones laborales para prevenir conflictos.</div></div>
+      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/></svg></div><div class="cscard-title">Relaciones Laborales</div><div class="cscard-text">Fortalecemos la comunicación con trabajadores y sus representantes para generar entornos laborales sanos.</div></div>
+      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="cscard-title">Seguridad y Salud en el Trabajo</div><div class="cscard-text">Implementamos sistemas para prevenir accidentes y promover entornos de trabajo seguros y normativos.</div></div>
+      <div class="cscard"><div class="cscard-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="cscard-title">Debida Diligencia en Cadena de Suministro</div><div class="cscard-text">Evaluamos y gestionamos riesgos laborales en proveedores y contratistas para proteger toda la cadena.</div></div>
+    </div>
+  </div>
+
+  <!-- SPLIT FOTO + NORMAS -->
+  <div class="padded">
+    <div class="split-section">
+      <div class="split-img" style="background-image:url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80')"></div>
+      <div class="split-content">
+        <div class="section-label">Normas que dominamos</div>
+        <h3 class="section-title" style="font-size:clamp(22px,3vw,32px)">Compliance como <span>ventaja competitiva</span></h3>
+        <p style="font-size:14px;color:var(--gray-text);line-height:1.65;margin-bottom:24px">No ofrecemos cuestionarios genéricos. Cada intervención está basada en la norma aplicable y orientada a generar valor real.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:24px">
+          <div class="norm-badge" style="background:rgba(33,150,243,0.08);border:1.5px solid rgba(33,150,243,0.2);color:var(--blue);font-size:12px;font-weight:700;padding:10px;border-radius:6px;text-align:center">NOM-035</div>
+          <div class="norm-badge" style="background:rgba(33,150,243,0.08);border:1.5px solid rgba(33,150,243,0.2);color:var(--blue);font-size:12px;font-weight:700;padding:10px;border-radius:6px;text-align:center">NOM-019</div>
+          <div class="norm-badge" style="background:rgba(33,150,243,0.08);border:1.5px solid rgba(33,150,243,0.2);color:var(--blue);font-size:12px;font-weight:700;padding:10px;border-radius:6px;text-align:center">NOM-030</div>
+          <div class="norm-badge" style="background:rgba(33,150,243,0.08);border:1.5px solid rgba(33,150,243,0.2);color:var(--blue);font-size:12px;font-weight:700;padding:10px;border-radius:6px;text-align:center">LFT</div>
+          <div class="norm-badge" style="background:rgba(33,150,243,0.08);border:1.5px solid rgba(33,150,243,0.2);color:var(--blue);font-size:12px;font-weight:700;padding:10px;border-radius:6px;text-align:center">STPS</div>
+          <div class="norm-badge" style="background:rgba(33,150,243,0.08);border:1.5px solid rgba(33,150,243,0.2);color:var(--blue);font-size:12px;font-weight:700;padding:10px;border-radius:6px;text-align:center">REPSE</div>
+        </div>
+        <a href="#" class="btn-primary" onclick="showSection('contacto');return false">Solicitar Diagnóstico →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h2 class="cta-title">¿Listo para convertir el cumplimiento<br>en productividad real?</h2>
+    <p class="cta-sub">Solicite su diagnóstico ejecutivo gratuito y descubra cómo mejorar su entorno laboral.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-primary" onclick="showSection('contacto');return false">Solicitar Diagnóstico</a>
+      <a href="#" class="btn-outline" onclick="openMeetingModal();return false">Agendar Reunión</a>
+    </div>
+  </div>
+
+</div><!-- /sec-cumplimiento -->
+
+
+<!-- ═══════════════════════════════
+     CONTACTO
+═══════════════════════════════ -->
+<div id="sec-contacto" class="page-section">
+  <div class="contact-section">
+    <div class="contact-inner">
+      <div>
+        <span style="display:inline-block;background:rgba(33,150,243,0.1);border:1px solid rgba(33,150,243,0.25);color:var(--accent);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px">Contáctenos</span>
+        <h1 class="contact-title">Hagamos que su empresa sea más<br><span>productiva y competitiva.</span></h1>
+        <p class="contact-desc">Solicite un Diagnóstico Ejecutivo sin costo y descubra cómo podemos ayudarle a reducir riesgos, mejorar la productividad y fortalecer su cadena de suministro.</p>
+        <div class="cdetail"><div class="cdetail-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="cdetail-lbl">Correo electrónico</div><div class="cdetail-val">contacto@b4w.com.mx</div></div></div>
+
+        <div class="cdetail"><div class="cdetail-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="cdetail-lbl">Ubicación</div><div class="cdetail-val">México · Colombia · Sudáfrica</div></div></div>
+        <div class="partners-box">
+          <div class="partners-lbl">Experiencia internacional con</div>
+          <div class="partners-logos">
+            <span class="plogo">BID</span><span class="plogo">PNUD México</span><span class="plogo">PNUD Sudáfrica</span><span class="plogo">USAID</span><span class="plogo">Colombia Productiva</span><span class="plogo">COMCE</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-title">Solicite su Diagnóstico Ejecutivo</div>
+        <div class="form-sub">Sin costo · Sin compromisos · Respuesta en 24 horas</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Nombre *</label><input type="text" class="form-input" placeholder="Su nombre" id="fname"></div>
+          <div class="form-group"><label class="form-label">Apellido *</label><input type="text" class="form-input" placeholder="Su apellido" id="lname"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Correo electrónico *</label><input type="email" class="form-input" placeholder="correo@empresa.com" id="femail"></div>
+        <div class="form-group"><label class="form-label">Empresa</label><input type="text" class="form-input" placeholder="Nombre de su empresa" id="fcompany"></div>
+        <div class="form-group"><label class="form-label">¿Qué servicio le interesa?</label>
+          <select class="form-select" id="fservice">
+            <option value="">Seleccione una opción</option>
+            <option>Desarrollo de Proveedores</option>
+            <option>Compliance Laboral Inteligente</option>
+            <option>Diagnóstico Organizacional</option>
+            <option>Evaluación IED Ready</option>
+            <option>Auditoría Laboral</option>
+            <option>Otro / No sé aún</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">¿Cuál es su principal reto?</label><textarea class="form-textarea" placeholder="Cuéntenos brevemente sobre su empresa y el reto que enfrenta..." id="fmessage"></textarea></div>
+        <button class="form-submit" onclick="submitForm()">Enviar Solicitud de Diagnóstico →</button>
+        <div class="form-note">Al enviar acepta ser contactado por el equipo de B4W para coordinar su diagnóstico.</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /sec-contacto -->
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo-row">
+        <img src="logo-b4w.png" alt="B4W"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="footer-logo-b4w" style="display:none">B4W</span>
+      </div>
+      <p class="footer-desc">Productividad. Cumplimiento. Desarrollo Empresarial.<br><br>Transformamos organizaciones en México, Colombia y Sudáfrica mediante metodologías probadas de desarrollo empresarial y compliance laboral.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Servicios</div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="showSection('proveedores');return false">Desarrollo de Proveedores</a></li>
+        <li><a href="#" onclick="showSection('cumplimiento');return false">Compliance Laboral</a></li>
+        <li><a href="#" onclick="showSection('inicio');return false">Casos de Éxito</a></li>
+        <li><a href="#" onclick="showSection('contacto');return false">Diagnóstico Ejecutivo</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Sectores</div>
+      <ul class="footer-links">
+        <li><a href="#">Automotriz</a></li>
+        <li><a href="#">Aeroespacial</a></li>
+        <li><a href="#">Manufactura Avanzada</a></li>
+        <li><a href="#">Logística</a></li>
+        <li><a href="#">Agroindustria</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contacto</div>
+      <ul class="footer-links">
+        <li><a href="mailto:contacto@b4w.com.mx">contacto@b4w.com.mx</a></li>
+        <li><a href="#" onclick="openMeetingModal();return false">Agendar Reunión</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 B4W. Todos los derechos reservados.</span>
+    <span>México · Colombia · Sudáfrica</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">✓ Solicitud enviada. Le contactaremos en menos de 24 horas.</div>
+
+<script>
+function showSection(id){
+  document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a[id^="nav-"]').forEach(a=>a.classList.remove('active'));
+  var el=document.getElementById('nav-'+id);
+  if(el)el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('navLinks').classList.remove('open');
+}
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
+function submitForm(){
+  var n=document.getElementById('fname').value,e=document.getElementById('femail').value;
+  if(!n||!e){alert('Por favor complete los campos obligatorios (Nombre y Correo electrónico).');return}
+  var t=document.getElementById('toast');
+  t.style.display='block';
+  setTimeout(function(){t.style.display='none'},5000);
+  ['fname','lname','femail','fcompany','fservice','fmessage'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.value='';
+  });
+}
+</script>
+
+<!-- MEETING MODAL OVERLAY -->
+<div id="meetingOverlay" onclick="closeMeetingModal(event)" style="display:none;position:fixed;inset:0;background:rgba(10,28,65,0.75);z-index:2000;padding:20px;overflow-y:auto;display:none;align-items:center;justify-content:center">
+  <div id="meetingModal" style="background:#fff;border-radius:16px;padding:40px;max-width:520px;width:100%;margin:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+    <button onclick="closeMeetingModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;padding:4px;color:#8fa3bd;font-size:20px;line-height:1">✕</button>
+    <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2196f3;margin-bottom:8px">Agendar Reunión</div>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#0d2545;margin-bottom:6px;line-height:1.2">Hablemos sobre su empresa</h2>
+    <p style="font-size:14px;color:#4a5e78;margin-bottom:26px;line-height:1.6">Cuéntenos brevemente qué necesita y le contactaremos para coordinar una reunión sin costo ni compromiso.</p>
+
+    <div id="meetingFormWrap">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:14px">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#0d2545;margin-bottom:5px">Nombre *</label>
+        <input type="text" id="mfname" placeholder="Su nombre" style="width:100%;padding:11px 13px;border:1.5px solid #e8eef6;border-radius:6px;font-size:14px;font-family:'Barlow',sans-serif;color:#0d2545;outline:none" onfocus="this.style.borderColor='#2196f3'" onblur="this.style.borderColor='#e8eef6'"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#0d2545;margin-bottom:5px">Apellido</label>
+        <input type="text" id="mflname" placeholder="Su apellido" style="width:100%;padding:11px 13px;border:1.5px solid #e8eef6;border-radius:6px;font-size:14px;font-family:'Barlow',sans-serif;color:#0d2545;outline:none" onfocus="this.style.borderColor='#2196f3'" onblur="this.style.borderColor='#e8eef6'"></div>
+      </div>
+      <div style="margin-bottom:14px"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#0d2545;margin-bottom:5px">Correo electrónico *</label>
+      <input type="email" id="mfemail" placeholder="correo@empresa.com" style="width:100%;padding:11px 13px;border:1.5px solid #e8eef6;border-radius:6px;font-size:14px;font-family:'Barlow',sans-serif;color:#0d2545;outline:none" onfocus="this.style.borderColor='#2196f3'" onblur="this.style.borderColor='#e8eef6'"></div>
+      <div style="margin-bottom:14px"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#0d2545;margin-bottom:5px">Empresa</label>
+      <input type="text" id="mfcompany" placeholder="Nombre de su empresa" style="width:100%;padding:11px 13px;border:1.5px solid #e8eef6;border-radius:6px;font-size:14px;font-family:'Barlow',sans-serif;color:#0d2545;outline:none" onfocus="this.style.borderColor='#2196f3'" onblur="this.style.borderColor='#e8eef6'"></div>
+      <div style="margin-bottom:14px"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#0d2545;margin-bottom:5px">¿Sobre qué tema quiere reunirse?</label>
+      <select id="mftopic" style="width:100%;padding:11px 13px;border:1.5px solid #e8eef6;border-radius:6px;font-size:14px;font-family:'Barlow',sans-serif;color:#0d2545;outline:none;background:#fff" onfocus="this.style.borderColor='#2196f3'" onblur="this.style.borderColor='#e8eef6'">
+        <option value="">Seleccione un tema</option>
+        <option>Desarrollo de Proveedores</option>
+        <option>Compliance Laboral</option>
+        <option>Diagnóstico Organizacional</option>
+        <option>Evaluación IED Ready</option>
+        <option>Otro / No sé aún</option>
+      </select></div>
+      <div style="margin-bottom:20px"><label style="display:block;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#0d2545;margin-bottom:5px">¿Cuándo prefiere reunirse?</label>
+      <select id="mftime" style="width:100%;padding:11px 13px;border:1.5px solid #e8eef6;border-radius:6px;font-size:14px;font-family:'Barlow',sans-serif;color:#0d2545;outline:none;background:#fff" onfocus="this.style.borderColor='#2196f3'" onblur="this.style.borderColor='#e8eef6'">
+        <option value="">Seleccione una opción</option>
+        <option>Esta semana</option>
+        <option>La próxima semana</option>
+        <option>En los próximos 15 días</option>
+        <option>Sin prisa, cuando haya disponibilidad</option>
+      </select></div>
+      <button onclick="submitMeeting()" style="width:100%;background:#2196f3;color:#fff;padding:14px;border-radius:6px;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;border:none;cursor:pointer;font-family:'Barlow',sans-serif;transition:background 0.2s" onmouseover="this.style.background='#1565c0'" onmouseout="this.style.background='#2196f3'">Solicitar Reunión →</button>
+      <div style="font-size:11px;color:#8fa3bd;text-align:center;margin-top:10px">Le contactaremos en menos de 24 horas para confirmar fecha y hora.</div>
+    </div>
+
+    <!-- SUCCESS STATE (hidden initially) -->
+    <div id="meetingSuccess" style="display:none;text-align:center;padding:20px 0">
+      <div style="width:64px;height:64px;background:rgba(33,150,243,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:#0d2545;margin-bottom:10px">¡Solicitud recibida!</h3>
+      <p style="font-size:15px;color:#4a5e78;line-height:1.65;margin-bottom:24px">Gracias por su interés. El equipo de B4W le contactará en menos de 24 horas para confirmar la reunión.</p>
+      <button onclick="closeMeetingModal()" style="background:#2196f3;color:#fff;padding:12px 28px;border-radius:6px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'Barlow',sans-serif">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function openMeetingModal(){
+  var o=document.getElementById('meetingOverlay');
+  o.style.display='flex';
+  document.body.style.overflow='hidden';
+  document.getElementById('meetingFormWrap').style.display='block';
+  document.getElementById('meetingSuccess').style.display='none';
+}
+function closeMeetingModal(e){
+  if(e&&e.target!==document.getElementById('meetingOverlay'))return;
+  document.getElementById('meetingOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+function submitMeeting(){
+  var n=document.getElementById('mfname').value,e=document.getElementById('mfemail').value;
+  if(!n||!e){alert('Por favor complete Nombre y Correo electrónico.');return;}
+  document.getElementById('meetingFormWrap').style.display='none';
+  document.getElementById('meetingSuccess').style.display='block';
+  ['mfname','mflname','mfemail','mfcompany','mftopic','mftime'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.value='';
+  });
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMeetingModal();});
+</script>
+
+</body>
+</html>
