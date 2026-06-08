@@ -309,6 +309,64 @@ footer{background:var(--navy);color:rgba(255,255,255,0.58);padding:46px 5% 26px}
 .mmi-val span{color:var(--accent)}
 .mmi-lbl{font-size:12px;color:var(--gray-text);margin-top:3px;line-height:1.4}
 </style>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="B4W ayuda a organizaciones a reducir riesgos laborales, desarrollar proveedores competitivos y convertir el cumplimiento laboral en productividad medible. +450 empresas atendidas en México, Colombia y Sudáfrica.">
+  <meta name="keywords" content="desarrollo de proveedores, compliance laboral, NOM-035, NOM-019, NOM-030, productividad empresarial, cadenas de valor, IED Ready, auditoría laboral, STPS, manufactura, proveedores México">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="B4W – Productividad. Cumplimiento. Desarrollo Empresarial.">
+  <link rel="canonical" href="https://www.b4w.com.mx/">
+
+  <!-- Open Graph (LinkedIn, WhatsApp, Facebook) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.b4w.com.mx/">
+  <meta property="og:title" content="B4W – Convertimos Cumplimiento y Cadenas de Suministro en Productividad Medible">
+  <meta property="og:description" content="Ayudamos a organizaciones a reducir riesgos laborales, fortalecer su talento y desarrollar proveedores capaces de competir en cadenas globales de valor. +450 empresas atendidas.">
+  <meta property="og:image" content="https://www.b4w.com.mx/logo-b4w.png">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:site_name" content="B4W">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="B4W – Productividad. Cumplimiento. Desarrollo Empresarial.">
+  <meta name="twitter:description" content="Desarrollamos proveedores, gestionamos compliance laboral y convertimos el cumplimiento en productividad real. +15 años de experiencia en México, Colombia y Sudáfrica.">
+  <meta name="twitter:image" content="https://www.b4w.com.mx/logo-b4w.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "B4W",
+    "description": "Empresa especializada en desarrollo de proveedores, compliance laboral inteligente y productividad organizacional. Ayudamos a reducir riesgos laborales y desarrollar proveedores capaces de competir en cadenas globales de valor.",
+    "url": "https://www.b4w.com.mx",
+    "logo": "https://www.b4w.com.mx/logo-b4w.png",
+    "email": "contacto@b4w.com.mx",
+    "foundingDate": "2010",
+    "areaServed": ["México", "Colombia", "Sudáfrica"],
+    "serviceType": [
+      "Desarrollo de Proveedores",
+      "Compliance Laboral",
+      "Auditorías Laborales",
+      "Capacitación Empresarial",
+      "Diagnóstico Organizacional"
+    ],
+    "knowsAbout": [
+      "NOM-035", "NOM-019", "NOM-030", "STPS", "LFT",
+      "Cadenas Globales de Valor", "IED Ready", "Productividad Organizacional"
+    ],
+    "numberOfEmployees": {
+      "@type": "QuantitativeValue",
+      "minValue": 10
+    },
+    "sameAs": [],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "MX"
+    }
+  }
+  </script>
+
 </head>
 <body>
 
@@ -961,11 +1019,34 @@ function closeMeetingModal(e){
 function submitMeeting(){
   var n=document.getElementById('mfname').value,e=document.getElementById('mfemail').value;
   if(!n||!e){alert('Por favor complete Nombre y Correo electrónico.');return;}
-  document.getElementById('meetingFormWrap').style.display='none';
-  document.getElementById('meetingSuccess').style.display='block';
-  ['mfname','mflname','mfemail','mfcompany','mftopic','mftime'].forEach(function(id){
-    var el=document.getElementById(id);if(el)el.value='';
-  });
+  var btn=document.querySelector('#meetingFormWrap button');
+  btn.disabled=true;btn.textContent='Enviando...';
+  var data=new FormData();
+  data.append('tipo','reunion');
+  data.append('nombre',n);
+  data.append('apellido',document.getElementById('mflname').value);
+  data.append('email',e);
+  data.append('empresa',document.getElementById('mfcompany').value);
+  data.append('tema',document.getElementById('mftopic').value);
+  data.append('cuando',document.getElementById('mftime').value);
+  fetch('enviar.php',{method:'POST',body:data})
+    .then(function(r){return r.json()})
+    .then(function(res){
+      if(res.ok){
+        document.getElementById('meetingFormWrap').style.display='none';
+        document.getElementById('meetingSuccess').style.display='block';
+        ['mfname','mflname','mfemail','mfcompany','mftopic','mftime'].forEach(function(id){
+          var el=document.getElementById(id);if(el)el.value='';
+        });
+      } else {
+        alert('Hubo un error al enviar. Por favor escríbenos a contacto@b4w.com.mx');
+        btn.disabled=false;btn.textContent='Solicitar Reunión →';
+      }
+    })
+    .catch(function(){
+      alert('Hubo un error al enviar. Por favor escríbenos a contacto@b4w.com.mx');
+      btn.disabled=false;btn.textContent='Solicitar Reunión →';
+    });
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMeetingModal();});
 </script>
