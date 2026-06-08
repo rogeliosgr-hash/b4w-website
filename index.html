@@ -243,6 +243,25 @@ footer{background:var(--navy);color:rgba(255,255,255,0.58);padding:46px 5% 26px}
 .icon3d-green{background:linear-gradient(135deg,#4dd0e1 0%,#1565c0 100%)}
 .icon3d-indigo{background:linear-gradient(135deg,#7986cb 0%,#1a237e 100%)}
 .icon3d-sky{background:linear-gradient(135deg,#81d4fa 0%,#01579b 100%)}
+.icon3d-cyan{background:linear-gradient(135deg,#4fc3f7 0%,#0277bd 100%)}
+.icon3d-purple{background:linear-gradient(135deg,#b39ddb 0%,#311b92 100%)}
+.rcard{background:#fff;border-radius:12px;padding:32px 26px;border:none;box-shadow:0 4px 24px rgba(13,37,69,0.09);transition:transform 0.2s,box-shadow 0.2s;text-align:center}
+.rcard:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(13,37,69,0.14)}
+.rcard-title{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.4px}
+.cscard{background:var(--off-white);border-radius:12px;padding:24px;transition:all 0.2s;text-align:center}
+.cscard:hover{background:#fff;box-shadow:0 6px 24px rgba(0,0,0,0.09);transform:translateY(-3px)}
+.cscard-ico{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;position:relative;box-shadow:0 6px 20px rgba(13,55,160,0.25)}
+.cscard-ico::after{content:'';position:absolute;top:5px;left:10px;width:32px;height:14px;background:rgba(255,255,255,0.2);border-radius:50%;transform:rotate(-20deg)}
+.cscard-ico svg{width:30px;height:30px;position:relative;z-index:2}
+.icon3d-wrap{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;position:relative;box-shadow:0 8px 24px rgba(13,55,160,0.3)}
+.icon3d-wrap::after{content:'';position:absolute;top:6px;left:12px;width:38px;height:18px;background:rgba(255,255,255,0.18);border-radius:50%;transform:rotate(-20deg)}
+.icon3d-wrap svg{width:36px;height:36px;position:relative;z-index:2}
+.icon3d-blue{background:linear-gradient(135deg,#42a5f5 0%,#0d47a1 100%)}
+.icon3d-teal{background:linear-gradient(135deg,#29b6f6 0%,#1565c0 100%)}
+.icon3d-navy{background:linear-gradient(135deg,#64b5f6 0%,#0d2d6e 100%)}
+.icon3d-green{background:linear-gradient(135deg,#4dd0e1 0%,#1565c0 100%)}
+.icon3d-indigo{background:linear-gradient(135deg,#7986cb 0%,#1a237e 100%)}
+.icon3d-sky{background:linear-gradient(135deg,#81d4fa 0%,#01579b 100%)}
 .rcard{background:#fff;border-radius:12px;padding:32px 26px;border:none;box-shadow:0 4px 24px rgba(13,37,69,0.09);transition:transform 0.2s,box-shadow 0.2s;text-align:center}
 .rcard:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(13,37,69,0.14)}
 .rcard-title{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.4px}
@@ -585,35 +604,35 @@ footer{background:var(--navy);color:rgba(255,255,255,0.58);padding:46px 5% 26px}
     <div class="section-label">Sectores en los que trabajamos</div>
     <div class="sector-grid">
       <div class="sector-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 17H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2z"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M5 10h14"/><path d="M8 7v3"/><path d="M16 7v3"/></svg>
+        <div class="icon3d-wrap icon3d-blue" style="width:56px;height:56px;margin-bottom:10px"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M19 17H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2z"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M5 10h14"/></svg></div>
         <div class="sector-name">Automotriz</div>
       </div>
       <div class="sector-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 6L12 13 2 6"/><path d="M2 6l10 4 10-4"/><path d="M12 17l-8-5"/><path d="M12 17l8-5"/><path d="M12 2v15"/><ellipse cx="12" cy="20" rx="3" ry="1.5"/></svg>
+        <div class="icon3d-wrap icon3d-teal" style="width:56px;height:56px;margin-bottom:10px"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="12" rx="2" ry="8" fill="white" opacity="0.95"/><ellipse cx="12" cy="4.5" rx="1.2" ry="1.5" fill="white"/><path d="M10 10 C6 9 2 11 2 13 L10 13 Z" fill="rgba(255,255,255,0.85)"/><path d="M14 10 C18 9 22 11 22 13 L14 13 Z" fill="rgba(255,255,255,0.85)"/><path d="M10.5 18.5 C8 18 6 19 6 20 L10.5 20 Z" fill="rgba(255,255,255,0.7)"/><path d="M13.5 18.5 C16 18 18 19 18 20 L13.5 20 Z" fill="rgba(255,255,255,0.7)"/><line x1="12" y1="18" x2="12" y2="21" stroke="white" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="7" cy="12" rx="1.2" ry="2.2" fill="rgba(255,255,255,0.6)" stroke="white" stroke-width="0.8"/><ellipse cx="17" cy="12" rx="1.2" ry="2.2" fill="rgba(255,255,255,0.6)" stroke="white" stroke-width="0.8"/></svg></div>
         <div class="sector-name">Aeroespacial</div>
       </div>
       <div class="sector-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/><circle cx="12" cy="13" r="2"/><path d="M12 11v-2"/><path d="M12 15v2"/></svg>
+        <div class="icon3d-wrap icon3d-navy" style="width:56px;height:56px;margin-bottom:10px"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
         <div class="sector-name">Dispositivos Médicos</div>
       </div>
       <div class="sector-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><circle cx="12" cy="14" r="3"/><path d="M12 11v-1"/><path d="M12 17v1"/><path d="M9 14H8"/><path d="M16 14h-1"/></svg>
+        <div class="icon3d-wrap icon3d-green" style="width:56px;height:56px;margin-bottom:10px"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2" fill="rgba(255,255,255,0.1)"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><circle cx="12" cy="14" r="2"/></svg></div>
         <div class="sector-name">Manufactura Avanzada</div>
       </div>
       <div class="sector-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3l2 2-2 2"/><path d="M7 5h10a2 2 0 012 2v1"/><path d="M15 21l-2-2 2-2"/><path d="M17 19H7a2 2 0 01-2-2v-1"/><circle cx="12" cy="12" r="3"/><path d="M3 12h3"/><path d="M18 12h3"/></svg>
+        <div class="icon3d-wrap icon3d-indigo" style="width:56px;height:56px;margin-bottom:10px"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
         <div class="sector-name">Químico</div>
       </div>
       <div class="sector-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        <div class="icon3d-wrap icon3d-sky" style="width:56px;height:56px;margin-bottom:10px"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="8" width="13" height="8" rx="1" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.6"/><path d="M14 11 L14 16 L20 16 L20 12 L18 9 L14 9 Z" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.6"/><path d="M15.5 10 L18.5 10 L19.5 12 L15.5 12 Z" fill="rgba(255,255,255,0.35)" stroke="none"/><circle cx="4" cy="17.5" r="1.8" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.5"/><circle cx="4" cy="17.5" r="0.7" fill="white" stroke="none"/><circle cx="10" cy="17.5" r="1.8" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.5"/><circle cx="10" cy="17.5" r="0.7" fill="white" stroke="none"/><circle cx="18" cy="17.5" r="1.8" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.5"/><circle cx="18" cy="17.5" r="0.7" fill="white" stroke="none"/><line x1="13" y1="14" x2="14" y2="14" stroke="white" stroke-width="2"/></svg></div>
         <div class="sector-name">Logística</div>
       </div>
       <div class="sector-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20"/><path d="M6 20V10l6-8 6 8v10"/><path d="M10 20v-5h4v5"/><circle cx="12" cy="8" r="1"/></svg>
+        <div class="icon3d-wrap icon3d-cyan" style="width:56px;height:56px;margin-bottom:10px"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 20 C2 20 2 8 12 8 C22 8 22 20 22 20" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M4 20 C4 20 4 10 12 10 C20 10 20 20 20 20" fill="rgba(0,0,0,0.35)" stroke="none"/><path d="M4 20 C4 20 4 10 12 10 C20 10 20 20 20 20" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" fill="none"/><line x1="9" y1="20" x2="10.5" y2="12" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round"/><line x1="15" y1="20" x2="13.5" y2="12" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round"/><line x1="9.2" y1="19" x2="14.8" y2="19" stroke="rgba(255,255,255,0.6)" stroke-width="1" stroke-linecap="round"/><line x1="9.7" y1="17" x2="14.3" y2="17" stroke="rgba(255,255,255,0.6)" stroke-width="1" stroke-linecap="round"/><line x1="2" y1="20" x2="2" y2="14" stroke="white" stroke-width="1.8" stroke-linecap="round"/><line x1="22" y1="20" x2="22" y2="14" stroke="white" stroke-width="1.8" stroke-linecap="round"/><line x1="2" y1="20" x2="22" y2="20" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
         <div class="sector-name">Minería y Tierras Raras</div>
       </div>
       <div class="sector-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z"/><circle cx="12" cy="9" r="2.5"/><path d="M5 20c-1.5.5-2 1-2 1.5S4 22 12 22s9-.5 9-1-.5-1-2-1.5"/></svg>
+        <div class="icon3d-wrap icon3d-purple" style="width:56px;height:56px;margin-bottom:10px"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z" fill="rgba(255,255,255,0.1)"/><circle cx="12" cy="9" r="2.5"/></svg></div>
         <div class="sector-name">Agroindustria</div>
       </div>
     </div>
